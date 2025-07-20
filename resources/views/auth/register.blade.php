@@ -1,86 +1,38 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Register</title>
-    <style>
-        * {
-            box-sizing: border-box;
-        }
-        body {
-            font-family: sans-serif;
-            background: #f5f5f5;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-        }
-        .form-container {
-            background: white;
-            padding: 2rem;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            width: 400px;
-        }
-        input[type="text"],
-        input[type="email"],
-        input[type="password"] {
-            width: 100%;
-            padding: 8px;
-            margin-top: 10px;
-            margin-bottom: 10px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-        }
-        .error {
-            color: red;
-            font-size: 0.9rem;
-            margin-bottom: 15px;
-        }
-        button {
-            width: 100%;
-            padding: 10px;
-            background-color: #007bff;
-            color: white;
-            border: none;
-            border-radius: 4px;
-            font-weight: bold;
-            cursor: pointer;
-        }
-        button:hover {
-            background-color: #0056b3;
-        }
-    </style>
-</head>
-<body>
-    <div class="form-container">
-        <form action="{{ route('register') }}" method="post">
+@extends('layouts.app')
+
+@section('title', 'register')
+
+@section('content')
+<div class="flex justify-center items-center h-[90%]">
+    <div class="bg-white p-8 rounded-lg shadow-lg w-sm">
+        <form action="{{ route('register') }}" method="POST">
             @csrf
 
             <label>Username</label>
-            <input type="text" name="username" value="{{ old('username') }}" placeholder="Your username">
+            <input type="text" name="username" value="{{ old('username') }}" placeholder="Your username" class="w-full p-2 my-2.5 border-slate-300 border-2 rounded-sm">
             @error('username')
-                <div class="error">{{ $message }}</div>
+                <div class="text-red-500 text-sm mb-3.5">{{ $message }}</div>
             @enderror
 
             <label>Email</label>
-            <input type="email" name="email" value="{{ old('email') }}" placeholder="Your email">
+            <input type="email" name="email" value="{{ old('email') }}" placeholder="Your email" class="w-full p-2 my-2.5 border-slate-300 border-2 rounded-sm">
             @error('email')
-                <div class="error">{{ $message }}</div>
+                <div class="text-red-500 text-sm mb-3.5">{{ $message }}</div>
             @enderror
 
             <label>Password</label>
-            <input type="password" name="password" placeholder="Your password">
+            <input type="password" name="password" placeholder="Your password" class="w-full p-2 my-2.5 border-slate-300 border-2 rounded-sm">
             @error('password')
-                <div class="error">{{ $message }}</div>
+                <div class="text-red-500 text-sm mb-3.5">{{ $message }}</div>
             @enderror
 
             <label>Confirm Password</label>
-            <input type="password" name="password_confirmation" placeholder="Confirm password">
+            <input type="password" name="password_confirmation" placeholder="Confirm password" class="w-full p-2 my-2.5 border-slate-300 border-2 rounded-sm">
 
-            <button type="submit">Register</button>
+            <button type="submit" class="w-full p-2.5 bg-blue-500 hover:bg-blue-800 mt-2.5 text-white border-0 rounded-sm font-bold hover:cursor-pointer hover:transition transition">Register</button>
         </form>
+        
+        <p class="mt-5">Already registered? <a class=" underline text-blue-500 hover:text-blue-700 hover:cursor-pointer hover:transition transition" href="{{  route('login')  }}">Login</a></p>
     </div>
-</body>
-</html>
+</div>
+@endsection

@@ -1,19 +1,22 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Log in</title>
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
-</head>
-<body class="min-h-screen flex items-center justify-center bg-gray-100">
-    <form action="/login" method="POST" class="w-full max-w-md bg-white p-6 rounded shadow">
-        @csrf
-        <input type="text" name="username" placeholder="Enter your username" class="w-full p-2 border border-gray-300 rounded">
+@extends('layouts.app')
 
-        <input type="password" name="password" placeholder="Enter your password" class="w-full p-2 border border-gray-300 rounded">
+@section('title', 'login')
 
-        <button type="submit" class="w-full bg-blue-600 text-white font-bold p-2 rounded hover:bg-blue-700 transition">Login</button>
-    </form>
-</body>
-</html>
+@section('content')
+<div class="flex justify-center items-center h-[90%]">
+    <div class="bg-white p-8 rounded-lg shadow-lg w-sm">
+        <form action="{{ route('login') }}" method="POST">
+            @csrf
+            <label>Username</label>
+            <input type="text" name="username" placeholder="Enter your username" class="w-full p-2 my-2.5 border-slate-300 border-2 rounded-sm">
+
+            <label>Password</label>
+            <input type="password" name="password" placeholder="Enter your password" class="w-full p-2 my-2.5 border-slate-300 border-2 rounded-sm">
+
+            <button type="submit" class="w-full p-2.5 bg-blue-500 hover:bg-blue-800 mt-2.5 text-white border-0 rounded-sm font-bold hover:cursor-pointer hover:transition transition">Login</button>
+        </form>
+        <p class="mt-5">Don't have an account? <a class=" underline text-blue-500 hover:text-blue-700 hover:cursor-pointer hover:transition transition" href="{{  route('register')  }}">Register</a></p>
+    </div>
+</div>
+@endsection
+
