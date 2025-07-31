@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\TaskController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -15,7 +16,10 @@ Route::middleware(['guest'])->group(function () {
 });
 
 Route::middleware(['auth'])->group(function () {
-    Route::get('/dashboard', function() {return view('dashboard');});
+    Route::post('/dashboard', [TaskController::class, 'create']);
+    Route::get('/dashboard', [TaskController::class, 'read']);
+    Route::put('/dashboard', [TaskController::class, 'update']);
+    Route::post('/deleteTask', [TaskController::class, 'delete']);
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
     Route::get('/profile', function() {return view('profile');});
 });
